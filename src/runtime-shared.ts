@@ -1,5 +1,5 @@
 import type { ClassValue } from "./classname";
-import { clsx } from "./classname";
+import { classify } from "./classname";
 
 type ClassNameProps = {
   className?: ClassValue;
@@ -8,8 +8,8 @@ type ClassNameProps = {
 const hasOwn = (value: object, key: PropertyKey): boolean =>
   Object.prototype.hasOwnProperty.call(value, key);
 
-export function normalizeIntrinsicProps<T>(type: unknown, props: T): T {
-  if (typeof type !== "string" || props == null || typeof props !== "object") {
+export function resolveIntrinsicProps<T>(type: unknown, props: T): T {
+  if (typeof type !== "string" || typeof props !== "object" || props === null) {
     return props;
   }
 
@@ -25,6 +25,6 @@ export function normalizeIntrinsicProps<T>(type: unknown, props: T): T {
 
   return {
     ...(props as Record<string, unknown>),
-    className: clsx(className),
+    className: classify(className),
   } as T;
 }

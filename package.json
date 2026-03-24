@@ -51,7 +51,7 @@
     "pack:dry-run": "vp pm pack --dry-run",
     "test": "vp run build && vp run test:unit && vp run test:types",
     "test:unit": "vp test run",
-    "test:types": "tsc -p tests/tsconfig.types.json --noEmit",
+    "test:types": "tsc -p src/tsconfig-types.json --noEmit",
     "typecheck": "tsc --noEmit",
     "prepare": "vp config"
   },

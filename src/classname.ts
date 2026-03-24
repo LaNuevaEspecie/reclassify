@@ -13,7 +13,28 @@ export type ClassValue =
   | ClassDictionary
   | ClassArray;
 
-export function clsx(value: ClassValue): string {
+export type ClassifyFn = (value: ClassValue) => string;
+
+type ConfigureOptions = {
+  fn: ClassifyFn;
+};
+
+let activeNormalizer: ClassifyFn = defaultClassify;
+
+export function configure({ fn }: ConfigureOptions): () => void {
+  const previousNormalizer = activeNormalizer;
+  activeNormalizer = fn;
+
+  return () => {
+    activeNormalizer = previousNormalizer;
+  };
+}
+
+export function classify(value: ClassValue): string {
+  return activeNormalizer(value);
+}
+
+export function defaultClassify(value: ClassValue): string {
   const tokens: string[] = [];
 
   appendClassName(value, tokens);

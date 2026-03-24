@@ -1,15 +1,15 @@
 import type * as React from "react";
 import * as ReactJSXRuntime from "react/jsx-runtime";
 import type { WidenedIntrinsicElements } from "./jsx-types";
-import { normalizeIntrinsicProps } from "./runtime-shared";
+import { resolveIntrinsicProps } from "./runtime-shared";
 
 export const Fragment = ReactJSXRuntime.Fragment;
 
 export const jsx: typeof ReactJSXRuntime.jsx = (type, props, key) =>
-  ReactJSXRuntime.jsx(type, normalizeIntrinsicProps(type, props), key);
+  ReactJSXRuntime.jsx(type, resolveIntrinsicProps(type, props), key);
 
 export const jsxs: typeof ReactJSXRuntime.jsxs = (type, props, key) =>
-  ReactJSXRuntime.jsxs(type, normalizeIntrinsicProps(type, props), key);
+  ReactJSXRuntime.jsxs(type, resolveIntrinsicProps(type, props), key);
 
 export namespace JSX {
   export type ElementType = React.JSX.ElementType;

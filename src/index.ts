@@ -1,1 +1,9 @@
-export { clsx, type ClassArray, type ClassDictionary, type ClassValue } from "./classname";
+export {
+  classify,
+  configure,
+  defaultClassify,
+  type ClassArray,
+  type ClassDictionary,
+  type ClassifyFn,
+  type ClassValue,
+} from "./classname";

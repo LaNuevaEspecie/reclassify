@@ -1,7 +1,7 @@
 import type * as React from "react";
 import * as ReactJSXDevRuntime from "react/jsx-dev-runtime";
 import type { WidenedIntrinsicElements } from "./jsx-types";
-import { normalizeIntrinsicProps } from "./runtime-shared";
+import { resolveIntrinsicProps } from "./runtime-shared";
 
 export const Fragment = ReactJSXDevRuntime.Fragment;
 
@@ -15,7 +15,7 @@ export const jsxDEV: typeof ReactJSXDevRuntime.jsxDEV = (
 ) =>
   ReactJSXDevRuntime.jsxDEV(
     type,
-    normalizeIntrinsicProps(type, props),
+    resolveIntrinsicProps(type, props),
     key,
     isStaticChildren,
     source,
