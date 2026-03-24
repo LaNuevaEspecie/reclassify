@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { clsx, type ClassValue } from "@yangshun/react-classname";
+import { clsx, type ClassValue } from "reclassify";
 
 type BadgeProps = {
   children: ReactNode;

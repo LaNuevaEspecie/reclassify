@@ -51,9 +51,6 @@ importers:
 
   apps/next:
     dependencies:
-      '@yangshun/react-classname':
-        specifier: workspace:*
-        version: link:../..
       next:
         specifier: ^16.2.1
         version: 16.2.1(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -63,6 +60,9 @@ importers:
       react-dom:
         specifier: ^19.2.4
         version: 19.2.4(react@19.2.4)
+      reclassify:
+        specifier: workspace:*
+        version: link:../..
     devDependencies:
       '@types/react':
         specifier: ^19.1.13
@@ -76,15 +76,15 @@ importers:
 
   apps/vite:
     dependencies:
-      '@yangshun/react-classname':
-        specifier: workspace:*
-        version: link:../..
       react:
         specifier: ^19.2.4
         version: 19.2.4
       react-dom:
         specifier: ^19.2.4
         version: 19.2.4(react@19.2.4)
+      reclassify:
+        specifier: workspace:*
+        version: link:../..
     devDependencies:
       '@types/react':
         specifier: ^19.1.13

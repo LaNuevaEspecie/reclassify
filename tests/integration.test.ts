@@ -10,7 +10,7 @@ describe("tooling integration", () => {
       {
         compilerOptions: {
           jsx: ts.JsxEmit.ReactJSX,
-          jsxImportSource: "@yangshun/react-classname",
+          jsxImportSource: "reclassify",
           module: ts.ModuleKind.ESNext,
           target: ts.ScriptTarget.ES2020,
         },
@@ -18,7 +18,7 @@ describe("tooling integration", () => {
       },
     );
 
-    expect(result.outputText).toContain('from "@yangshun/react-classname/jsx-runtime"');
+    expect(result.outputText).toContain('from "reclassify/jsx-runtime"');
   });
 
   it("uses the package jsx-runtime for Babel importSource", () => {
@@ -33,13 +33,13 @@ describe("tooling integration", () => {
             presetReact,
             {
               runtime: "automatic",
-              importSource: "@yangshun/react-classname",
+              importSource: "reclassify",
             },
           ],
         ],
       },
     );
 
-    expect(result?.code).toContain('"@yangshun/react-classname/jsx-runtime"');
+    expect(result?.code).toContain('"reclassify/jsx-runtime"');
   });
 });

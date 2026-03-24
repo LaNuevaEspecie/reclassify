@@ -4,7 +4,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "jsx": "react-jsx",
-    "jsxImportSource": "@yangshun/react-classname",
+    "jsxImportSource": "reclassify",
     "lib": ["ES2020", "DOM"],
     "strict": true,
     "noEmit": true,

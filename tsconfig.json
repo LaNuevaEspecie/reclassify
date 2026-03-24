@@ -4,7 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "jsx": "react-jsx",
-    "jsxImportSource": "@yangshun/react-classname",
+    "jsxImportSource": "reclassify",
     "lib": ["ES2020", "DOM"],
     "strict": true,
     "declaration": true,
@@ -13,9 +13,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "paths": {
-      "@yangshun/react-classname": ["./src/index.ts"],
-      "@yangshun/react-classname/jsx-runtime": ["./src/jsx-runtime.ts"],
-      "@yangshun/react-classname/jsx-dev-runtime": ["./src/jsx-dev-runtime.ts"]
+      "reclassify": ["./src/index.ts"],
+      "reclassify/jsx-runtime": ["./src/jsx-runtime.ts"],
+      "reclassify/jsx-dev-runtime": ["./src/jsx-dev-runtime.ts"]
     },
     "skipLibCheck": true
   },
