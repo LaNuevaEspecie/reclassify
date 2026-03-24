@@ -3,14 +3,14 @@
 `reclassify` is an automatic JSX runtime for React that lets intrinsic elements accept Vue- and Svelte-style `className` values directly in JSX.
 
 ```tsx
-/** @jsxImportSource reclassify */
-
+// Before:
 <button className={
   clsx("btn", ["btn-primary", { "btn-disabled": false }], { "is-active": true }
 )}>
   Save
 </button>
 
+// After:
 <button className={
   // No need for clsx!
   ["btn", ["btn-primary", { "btn-disabled": false }], { "is-active": true }]
@@ -25,10 +25,12 @@ It normalizes intrinsic elements only. Custom components keep their declared `cl
 ## Install
 
 ```bash
-pnpm add reclassify react
+pnpm add reclassify # Assumes you have react installed
 ```
 
 ## Usage
+
+There are two common ways to use `reclassify`, via TypeScript or Babel:
 
 ### TypeScript and tsconfig
 
@@ -109,6 +111,11 @@ Useful commands:
 - `vp run build:examples` builds both example apps.
 - `vp run check` runs the library validation plus both example app smoke tests.
 
-The Vite app demonstrates intrinsic `className` arrays and objects directly in JSX, plus a custom component that opts into the same pattern with `clsx`.
-The Next.js app shows the same API through a framework setup using `jsxImportSource: "reclassify"` in `tsconfig.json`.
+## Examples
+
+Examples can be found in `apps/`:
+
+- `apps/vite`: The Vite app demonstrates intrinsic `className` arrays and objects directly in JSX, plus a custom component that opts into the same pattern with `clsx`.
+- `apps/next`: The Next.js app shows the same API through a framework setup using `jsxImportSource: "reclassify"` in `tsconfig.json`.
+
 Both apps consume `reclassify` through the workspace package itself rather than importing source files from outside their own package directories.
